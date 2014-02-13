@@ -9,7 +9,7 @@ if [ $# == 2 ]; then target=":${*:$#}"; else target=""; fi
 
 here=`pwd`
 
-while [ ! -e ./pants ]; do
+while [ ! \( -f ./pants -a -x ./pants \) ]; do
     if [ `pwd` == "/" ]; then
         echo "No pants found!"
         exit 1
