@@ -3,9 +3,23 @@
 #
 # Skirt around pants to invoke builds from the current directory.
 #
+# Features:
+#
+#  - Determines target to build based on current working directory.
+#
+#  - Default goal to 'compile' of the default target for the current
+#    directory.
+#
+#  - Adds --binary-deployjar option when goal is 'binary'.
+#
 
 if [ $# == 0 ]; then goal="compile"; else goal=$1; fi
 if [ $# == 2 ]; then target=":${*:$#}"; else target=""; fi
+
+#
+# Fix options to sensible defaults.
+#
+if [ $goal == "binary" ]; then goal="binary --binary-deployjar"; fi
 
 here=`pwd`
 
